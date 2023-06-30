@@ -1,4 +1,7 @@
+#!/usr/bin/python3
+
 import sys
+
 
 def factorize(number):
     factors = []
@@ -6,6 +9,7 @@ def factorize(number):
         if number % i == 0:
             factors.append((i, number // i))
     return factors
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -20,4 +24,5 @@ if __name__ == '__main__':
     for number in numbers:
         factors = factorize(int(number))
         for factor in factors:
-            print(f"{number}={factor[0]}*{factor[1]}")
+            print(f"{number} = {factor[0]} * {factor[1]}")
+
