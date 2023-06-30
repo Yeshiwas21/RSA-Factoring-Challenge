@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import sys
 
+
 def factorize(number):
     factors = []
     for i in range(2, number // 2 + 1):
@@ -8,21 +9,26 @@ def factorize(number):
             factors.append((i, number // i))
     return factors
 
-def main():
+
+if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: factors <file>")
-        return
+        sys.exit(1)
 
     filename = sys.argv[1]
 
-    with open(filename, 'r') as file:
-        numbers = file.read().splitlines()
+    try:
+        with open(filename, 'r') as file:
+            numbers = [int(line.strip()) for line in file]
+    except FileNotFoundError:
+        print(f"File '{filename}' not found.")
+        sys.exit(1)
+    except ValueError:
+        print("Invalid input in the file. Only natural numbers greater than 1 are allowed.")
+        sys.exit(1)
 
     for number in numbers:
-        factors = factorize(int(number))
+        factors = factorize(number)
         for factor in factors:
             print(f"{number}={factor[0]}*{factor[1]}")
-
-if __name__ == '__main__':
-    main()
 
